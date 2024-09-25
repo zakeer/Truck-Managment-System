@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Trucks from './Trucks';
 import BasicModal from './BasicModal';
 import FIlteringTrucks from './FilteringTrucks';
@@ -103,49 +103,49 @@ const AddTruck = () => {
       lastMaintenance: '2024-04-20',
     },
     {
-      "truckId": 11,
-      "model": "GMC Sierra 1500",
-      "status": "Active",
-      "location": "Phoenix, AZ",
-      "capacity": "9000 lbs",
-      "fuelLevel": "25%",
-      "lastMaintenance": "2024-06-05"
+      truckId: 11,
+      model: "GMC Sierra 1500",
+      status: "Active",
+      location: "Phoenix, AZ",
+      capacity: "9000 lbs",
+      fuelLevel: "25%",
+      lastMaintenance: "2024-06-05"
     },
     {
-      "truckId": 12,
-      "model": "Nissan Titan",
-      "status": "Maintenance",
-      "location": "New York, NY",
-      "capacity": "9400 lbs",
-      "fuelLevel": "70%",
-      "lastMaintenance": "2024-08-10"
+      truckId: 12,
+      model: "Nissan Titan",
+      status: "Maintenance",
+      location: "New York, NY",
+      capacity: "9400 lbs",
+      fuelLevel: "70%",
+      lastMaintenance: "2024-08-10"
     },
     {
-      "truckId": 13,
-      "model": "Honda Ridgeline",
-      "status": "Out Of Service",
-      "location": "San Francisco, CA",
-      "capacity": "7500 lbs",
-      "fuelLevel": "50%",
-      "lastMaintenance": "2024-07-18"
+      truckId: 13,
+      model: "Honda Ridgeline",
+      status: "Out Of Service",
+      location: "San Francisco, CA",
+      capacity: "7500 lbs",
+      fuelLevel: "50%",
+      lastMaintenance: "2024-07-18"
     },
     {
-      "truckId": 14,
-      "model": "Isuzu NPR",
-      "status": "Active",
-      "location": "Las Vegas, NV",
-      "capacity": "12000 lbs",
-      "fuelLevel": "65%",
-      "lastMaintenance": "2024-08-01"
+      truckId: 14,
+      model: "Isuzu NPR",
+      status: "Active",
+      location: "Las Vegas, NV",
+      capacity: "12000 lbs",
+      fuelLevel: "65%",
+      lastMaintenance: "2024-08-01"
     },
     {
-      "truckId": 15,
-      "model": "Mack Anthem",
-      "status": "Maintenance",
-      "location": "Denver, CO",
-      "capacity": "30 tons",
-      "fuelLevel": "35%",
-      "lastMaintenance": "2024-07-28"
+      truckId: 15,
+      model: "Mack Anthem",
+      status: "Maintenance",
+      location: "Denver, CO",
+      capacity: "30 tons",
+      fuelLevel: "35%",
+      lastMaintenance: "2024-07-28"
     }
   ]);
 
