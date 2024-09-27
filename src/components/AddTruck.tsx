@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Trucks from './Trucks';
 import BasicModal from './BasicModal';
 import FIlteringTrucks from './FilteringTrucks';
 import SearchTruck from './SearchTruck';
+
+let renderCount = 0;
 
 const AddTruck = () => {
   const [showModal, setShowModal] = useState(false);
@@ -10,6 +12,17 @@ const AddTruck = () => {
   const [selectedTruck, setSelectedTruck] = useState(null);
   const [truckStatus, setTruckStatus] = useState('All Status'); //for active , Maintenance , Out Of Service
   const [filteredResults, setFilteredResults] = useState([]); //for category and search results
+
+  renderCount++;
+  console.log("::: AddTruck renderCount::::", renderCount);
+  /*
+  useEffect(() => {
+    if(!showModal) {
+      setIsEditing(false);
+      setSelectedTruck(null);
+    }
+  }, [showModal])
+  */
 
   const [trucks, setTrucks] = useState([
     {
@@ -150,50 +163,68 @@ const AddTruck = () => {
   ]);
 
   // Function to add a new truck
-  const addTruck = (newTruck) => {
+  const addTruck = useCallback((newTruck) => {
     setTrucks([...trucks, newTruck]);
-  };
+  }, []);
 
   // funtion to upldate the truck
-  const updateTruck = (updatedTruck) => {
+  const updateTruck = useCallback((updatedTruck) => {
     setTrucks(
       trucks.map((truck) =>
         truck.truckId === updatedTruck.truckId ? updatedTruck : truck
       )
     );
-  };
+  }, [trucks]);
 
   //function to open the modal with selected truck to pre-fill the form
-  const handleEdit = (truck) => {
+  const handleEdit = useCallback((truck) => {
     setSelectedTruck(truck);
     setIsEditing(true);
     setShowModal(true);
-  };
+  }, []);
 
   //thos fucntion for Active , Maintenance , Out Of Service
-  const handleFilterChange = (status) => {
+  const handleFilterChange = useCallback((status) => {
     setTruckStatus(status);
-  };
+  }, []);
 
   //this fucntion for category and search results the results stored in filteredTrucks array
-  const handleSearchResults = (filteredTrucks) => {
+  const handleSearchResults = useCallback((filteredTrucks) => {
     setFilteredResults(filteredTrucks);
-  };
+  }, []);
 
   // Apply status filter first
-  const trucksFilteredByStatus =
-    truckStatus === 'All Status'
-      ? trucks
-      : trucks.filter((truck) => truck.status === truckStatus);
+  const trucksFilteredByStatus = useMemo(() => {
+    return truckStatus === 'All Status'
+    ? trucks
+    : trucks.filter((truck) => {
+      console.log(":: Check For Status ::")
+      return truck.status === truckStatus
+    });
+  }, [trucks, truckStatus])
+
+
+  var a = useMemo(() => {
+    console.log("a memo invoked")
+    return 100;
+  }, [ isEditing ]);
+
+    
 
   // this function is a combination of search filter feature and status filter feature.
   const trucksToDisplay =
     filteredResults.length > 0 ? filteredResults : trucksFilteredByStatus;
 
+  const handleAddNewTruck = () => {
+    setShowModal(true);
+    setIsEditing(false);
+    setSelectedTruck(null);
+  }
+
   return (
     <>
       <div className="filtering-options">
-        <div onClick={() => setShowModal(true)} className="truck-add-btn">
+        <div onClick={handleAddNewTruck} className="truck-add-btn">
           + Add New Truck
         </div>
 
